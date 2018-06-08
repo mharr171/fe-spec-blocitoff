@@ -1,28 +1,215 @@
-.App {
+html{
+  background-color: white;
+  /* background-color: rgba(255,0,0,0.1); */
+  height: 100vh;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body{
+  background-color: white;
+  /* background-color: rgba(0,255,0,0.1); */
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-width: 500px;
+  width: 80%;
+}
+
+.tasksWrapper{
+  background-color: white;
+  /* background-color: rgba(0,0,0,0.1); */
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu main"
+    "footer footer";
+  grid-template-columns: 150px auto;
+  grid-template-rows: 100px calc(100vh - 170px) 70px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tasksHeader{
+  font-family: 'Permanent Marker', cursive;
+  font-size: 80%;
+  grid-area: header;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.tasksMenu{
+  font-family: 'Open Sans', sans-serif;
+  grid-area: menu;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.tasksBody{
+  font-family: 'Open Sans', sans-serif;
+  display: grid;
+  grid: subgrid;
+  grid-area: main;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.task{
+  background-color: white;
+  background-color: rgba(0,0,0,0.15);
+  box-shadow: 8px 6px 2px rgba(0,0,0,0.05);
+  display: grid;
+  grid: subgrid;
+  grid-template-areas: "content complete";
+  grid-template-columns: auto 50px;
+  grid-template-rows: auto;
+  opacity: 1;
+  padding: 10px;
+  max-height: 25%;
+}
+
+.taskContent{
+  grid-area: content;
+}
+
+.removeTask{
+  font-size: 80%;
+  grid-area: complete;
+  text-align: center;
+  transition: font-size 0.3s ease-in-out;
+}
+
+.completeTask:hover{
+  animation: grow ease-in 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
   color: white;
+  color: rgba(215,70,70,1);
+  cursor: pointer;
+  font-size: 140%;
+  font-weight: bold;
+  transition: font-size 0.3s ease-in-out;
 }
 
-.App-title {
-  font-size: 1.5em;
+.button{
+  background-color: white;
+  color: black;
+  font-size: 120%;
+  margin: 4px 0;
+  padding: 5px 0;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition-delay: 0.2s;
 }
 
-.App-intro {
-  font-size: large;
+.button:hover{
+  background-color: black;
+  color: white;
+  font-size: 120%;
+  margin: 4px 0;
+  padding: 5px 0;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition-delay: 0s;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes fadeIn { from { opacity:0; } to { opacity:0.8; } }
+
+.fadeIn {
+  animation: fadeIn ease-in 1;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.tasksFooter{
+  font-family: 'Open Sans', sans-serif;
+  grid-area: footer;
+  overflow: hidden;
+}
+
+.formWrapper{
+  display: grid;
+  grid: subgrid;
+  grid-template-areas: "input select submit";
+  grid-template-columns: auto 90px 55px;
+  grid-template-rows: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.taskInput{
+  font-size: 110%;
+  grid-area: input;
+}
+
+.taskPriority{
+  font-size: 100%;
+  grid-area: select;
+}
+
+.taskButton{
+  background-color: rgba(120,200,120,1);
+  color: rgba(20,160,20,1);
+  font-size: 130%;
+  grid-area: submit;
+  transition: font-size 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.taskButton:hover{
+  font-size: 120%;
+  transition: font-size 0.3s ease-in-out;
+  -moz-box-shadow:    inset 0 0 5px rgba(255,255,255,0.6);
+  -webkit-box-shadow: inset 0 0 5px rgba(255,255,255,0.6);
+  box-shadow:         inset 0 0 5px rgba(255,255,255,0.6);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+input, textarea{
+  outline: none;
+  padding-left: 15px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.notCompleted {
+  text-decoration: none;
+}
+
+.active-button{
+  background-color: grey;
+  color: white;
+  font-size: 120%;
+  margin: 4px 0;
+  padding: 5px 0;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition-delay: 0s;
 }
